@@ -1,13 +1,12 @@
-
 from django.urls import path
 
-from accounts.views import (CustomerRegistrationView,
-                            LoginAPIView,
-                            ProtectedAPIView,
-                            CustomTokenRefreshView,
-                            ProtectedAPIView,
-                            LogoutAPIView,
-                            GoogleLoginAPIView,
+from accounts.views import (
+    CustomerRegistrationView,
+    LoginAPIView,
+    ProtectedAPIView,
+    CustomTokenRefreshView,
+    LogoutAPIView,
+    GoogleLoginAPIView,
 )
 
 
@@ -15,36 +14,31 @@ urlpatterns = [
     path(
         "register/validate/",
         CustomerRegistrationView.as_view(),
-        name="customer-registration-validation"
+        name="customer-registration-validation",
     ),
-
     path(
         "login/",
         LoginAPIView.as_view(),
-        name="customer-login"
+        name="customer-login",
     ),
-
     path(
         "token/refresh/",
         CustomTokenRefreshView.as_view(),
-        name="token-refresh"
+        name="token-refresh",
     ),
-
     path(
         "protected/",
         ProtectedAPIView.as_view(),
-        name="protected-api"
+        name="protected-api",
     ),
-
     path(
         "logout/",
         LogoutAPIView.as_view(),
-        name="customer-logout"
+        name="customer-logout",
     ),
-
     path(
-        'google-login/',
+        "google-login/",
         GoogleLoginAPIView.as_view(),
-        name='google-login'
+        name="google-login",
     ),
 ]
