@@ -20,18 +20,19 @@ ALL_ROLES = (
     Role.CUSTOMER,
 )
 
-# Higher support roles inherit the permissions of lower support roles.
+# Permission inheritance: higher support roles include lower support access.
+# The Platform Admin role itself remains exclusive to platform administrators.
 ROLE_HIERARCHY = {
     Role.PLATFORM_ADMIN: (
         Role.PLATFORM_ADMIN,
-        Role.SUPPORT_MANAGER,
-        Role.SUPPORT_AGENT,
     ),
     Role.SUPPORT_MANAGER: (
+        Role.PLATFORM_ADMIN,
         Role.SUPPORT_MANAGER,
-        Role.SUPPORT_AGENT,
     ),
     Role.SUPPORT_AGENT: (
+        Role.PLATFORM_ADMIN,
+        Role.SUPPORT_MANAGER,
         Role.SUPPORT_AGENT,
     ),
     Role.CUSTOMER: (
