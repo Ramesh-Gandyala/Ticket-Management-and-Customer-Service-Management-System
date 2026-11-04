@@ -59,3 +59,17 @@ organization-wide settings should require manager or administrator access.
   groups and testing protected endpoints requires database tables.
 - Object-level rules (for example, a customer may view only their own tickets)
   must be added when ticket and organization ownership models are implemented.
+
+## Local settings
+
+The Django secret key is now read from the `DJANGO_SECRET_KEY` environment
+variable and is intentionally not stored in Git. In PowerShell, create a fresh
+local key for the current terminal session with:
+
+```powershell
+$env:DJANGO_SECRET_KEY = (python -c "import secrets; print(secrets.token_urlsafe(50))")
+```
+
+Set `DJANGO_DEBUG=True` only for local development. The secret key that was
+previously committed must be treated as exposed and replaced; changing the
+current file does not erase it from earlier Git history.
