@@ -8,12 +8,25 @@ import os
 from datetime import timedelta
 from pathlib import Path
 
+from django.core.exceptions import ImproperlyConfigured
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Development defaults. Set environment variables before deployment.
-SECRET_KEY = 'django-insecure-8^&gpde@ra9f6vf3h&&t_5pz+7y48$tzbd47gr#z56a!*@dz2a'
-DEBUG = True
-ALLOWED_HOSTS = []
+# Never commit a real Django secret key. Set DJANGO_SECRET_KEY in the environment.
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
+if not SECRET_KEY:
+    raise ImproperlyConfigured(
+        "DJANGO_SECRET_KEY environment variable must be configured."
+    )
+
+DEBUG = os.environ.get("DJANGO_DEBUG", "False").lower() == "true"
+ALLOWED_HOSTS = [
+    host.strip()
+    for host in os.environ.get(
+        "DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1"
+    ).split(",")
+    if host.strip()
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
