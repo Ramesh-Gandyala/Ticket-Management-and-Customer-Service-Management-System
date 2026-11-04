@@ -4,14 +4,14 @@ This project uses role-based access control (RBAC) with Django Groups.
 
 ## Roles
 
-Create these Django Groups after the database is configured:
+Create these Django Groups after the database is configured by running `python manage.py setup_roles`:
 
 - `Platform Admin`
 - `Support Manager`
 - `Support Agent`
 - `Customer`
 
-Assign each user to the appropriate group in Django Admin. Do not trust a role
+The command creates the groups but does not assign users. Assign each user to the appropriate group in Django Admin. Do not trust a role
 sent by the frontend; role assignment must be performed by a trusted
 administrator or a validated backend workflow.
 
